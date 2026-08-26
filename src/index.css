@@ -1,25 +1,24 @@
-/* Importation de la police Inter depuis Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
 @import "tailwindcss";
 
-/* Configuration du thème de base de Tailwind v4 */
 @theme {
   --font-sans: 'Inter', sans-serif;
 }
 
-/* Styles globaux pour l'accessibilité et le comportement de la page */
+/* Indique à Tailwind que le mode sombre s'active avec la classe "dark" */
+@custom-variant dark (&:is(.dark *));
+
 @layer base {
   html {
-    scroll-behavior: smooth; /* Pour que les liens du menu glissent doucement */
+    scroll-behavior: smooth;
   }
   
   body {
-    @apply text-gray-800 bg-[#F8F9FA] antialiased;
+    /* On ajoute les couleurs du mode sombre (dark:bg-... dark:text-...) et une transition */
+    @apply text-gray-800 bg-[#F8F9FA] antialiased dark:bg-[#121212] dark:text-gray-200 transition-colors duration-300;
   }
 
-  /* Focus visible global pour la navigation au clavier (Accessibilité) */
   *:focus-visible {
-    @apply outline-none ring-2 ring-[#FFB703] ring-offset-2;
+    @apply outline-none ring-2 ring-[#FFB703] ring-offset-2 dark:ring-offset-[#121212];
   }
 }
