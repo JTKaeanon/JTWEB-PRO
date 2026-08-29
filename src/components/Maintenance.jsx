@@ -96,6 +96,11 @@ export default function Maintenance() {
           </div>
 
         </div>
+
+        <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-8 max-w-2xl mx-auto">
+          Modification hors-forfait (Standard) ou au-delà de l'heure incluse (Sérénité) : <span className="font-semibold text-[#212529] dark:text-white">40€/h</span>, facturation par tranche de 30 minutes minimum.
+        </p>
+
       </div>
     </section>
   );
