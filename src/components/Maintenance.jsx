@@ -47,9 +47,9 @@ export default function Maintenance() {
 
             <ul className="space-y-4 mb-8">
               <li className="flex items-start gap-3"><Check className="text-green-500 shrink-0 mt-0.5" size={20} /><span className="text-gray-700 dark:text-gray-300">Mises à jour régulières</span></li>
-              <li className="flex items-start gap-3"><Check className="text-green-500 shrink-0 mt-0.5" size={20} /><span className="text-gray-700 dark:text-gray-300">Sauvegardes mensuelles</span></li>
-              <li className="flex items-start gap-3"><Check className="text-green-500 shrink-0 mt-0.5" size={20} /><span className="text-gray-700 dark:text-gray-300">Surveillance sécurité</span></li>
-              <li className="flex items-start gap-3 text-gray-400 dark:text-gray-600"><X className="shrink-0 mt-0.5" size={20} /><span>Rapports de visites</span></li>
+              <li className="flex items-start gap-3"><Check className="text-green-500 shrink-0 mt-0.5" size={20} /><span className="text-gray-700 dark:text-gray-300">Sauvegardes mensuelles complètes</span></li>
+              <li className="flex items-start gap-3"><Check className="text-green-500 shrink-0 mt-0.5" size={20} /><span className="text-gray-700 dark:text-gray-300">Surveillance sécurité de base</span></li>
+              <li className="flex items-start gap-3"><Check className="text-green-500 shrink-0 mt-0.5" size={20} /><span className="text-gray-700 dark:text-gray-300">Rapport de visites trimestriel</span></li>
               <li className="flex items-start gap-3 text-gray-400 dark:text-gray-600"><X className="shrink-0 mt-0.5" size={20} /><span>Modifications incluses</span></li>
             </ul>
             <a href="#contact" className="block w-full text-center bg-gray-100 dark:bg-gray-800 text-[#212529] dark:text-white px-6 py-3 rounded-md font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
