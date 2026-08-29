@@ -1,9 +1,13 @@
-import { useState, useEffect } from 'react';
-import { MapPin, Mail, Phone, Clock, Send } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { MapPin, Mail, Phone, Clock, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xvkooeyv';
 
 export default function Contact({ prefilledSubject }) {
   const [sujetDemande, setSujetDemande] = useState('essentiel');
   const [rgpdAccepted, setRgpdAccepted] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | sending | success | error
+  const formRef = useRef(null);
 
   useEffect(() => {
     if (prefilledSubject) setSujetDemande(prefilledSubject);
@@ -17,11 +21,51 @@ export default function Contact({ prefilledSubject }) {
     { id: 'autre', label: 'Autre demande' },
   ];
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('sending');
+
+    const formData = new FormData(formRef.current);
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' },
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        formRef.current.reset();
+        setRgpdAccepted(false);
+        setSujetDemande('essentiel');
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
+  };
+
+  if (status === 'success') {
+    return (
+      <section id="contact" className="py-24 bg-[#F8F9FA] dark:bg-[#121212] transition-colors duration-300">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <CheckCircle2 className="text-green-500 mx-auto mb-4" size={56} />
+          <h2 className="text-3xl font-extrabold text-[#212529] dark:text-white mb-4">Message envoyé !</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            Merci pour votre demande, je reviens vers vous très rapidement.
+          </p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="contact" className="py-24 bg-[#F8F9FA] dark:bg-[#121212] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-5 gap-16">
-          
+
           {/* COLONNE GAUCHE */}
           <div className="lg:col-span-2 space-y-8">
             <div>
@@ -32,7 +76,7 @@ export default function Contact({ prefilledSubject }) {
             </div>
 
             <div className="space-y-6">
-              
+
               <div className="flex items-start gap-4">
                 <div className="bg-yellow-100 dark:bg-yellow-900/30 p-3 rounded-full text-[#FFB703] shrink-0"><Mail size={24} /></div>
                 <div><h4 className="font-bold text-[#212529] dark:text-white">Email</h4><a href="mailto:contact@jtweb.fr" className="text-gray-600 dark:text-gray-400 hover:text-[#FFB703]">contact@jtweb.fr</a></div>
@@ -41,7 +85,7 @@ export default function Contact({ prefilledSubject }) {
                 <div className="bg-yellow-100 dark:bg-yellow-900/30 p-3 rounded-full text-[#FFB703] shrink-0"><Phone size={24} /></div>
                 <div><h4 className="font-bold text-[#212529] dark:text-white">Téléphone</h4><a href="tel:+33600000000" className="text-gray-600 dark:text-gray-400 hover:text-[#FFB703]">06 XX XX XX XX</a></div>
               </div>
-              
+
               {/* NOUVEAU BLOC POUR COMBLER LE VIDE */}
               <div className="flex items-start gap-4 pt-4 border-t border-gray-200 dark:border-gray-800">
                 <div className="bg-yellow-100 dark:bg-yellow-900/30 p-3 rounded-full text-[#FFB703] shrink-0"><Clock size={24} /></div>
@@ -52,8 +96,8 @@ export default function Contact({ prefilledSubject }) {
 
           {/* COLONNE DROITE : FORMULAIRE */}
           <div className="lg:col-span-3">
-            <form className="bg-white dark:bg-[#1a1d20] p-8 sm:p-10 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 transition-colors duration-300">
-              
+            <form ref={formRef} onSubmit={handleSubmit} className="bg-white dark:bg-[#1a1d20] p-8 sm:p-10 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 transition-colors duration-300">
+
               <div className="mb-8">
                 <label className="block text-sm font-bold text-[#212529] dark:text-white mb-4">Quel est l'objet de votre demande ?</label>
                 <div className="grid sm:grid-cols-2 gap-3">
@@ -67,29 +111,42 @@ export default function Contact({ prefilledSubject }) {
               </div>
 
               <div className="grid sm:grid-cols-2 gap-6 mb-6">
-                <div><label className="block text-sm font-bold text-[#212529] dark:text-white mb-2">Nom</label><input type="text" className="w-full p-3 bg-[#F8F9FA] dark:bg-[#121212] border border-gray-200 dark:border-gray-700 dark:text-white rounded-md focus:outline-none focus:border-[#FFB703]" placeholder="Votre nom" /></div>
-                <div><label className="block text-sm font-bold text-[#212529] dark:text-white mb-2">Entreprise (Optionnel)</label><input type="text" className="w-full p-3 bg-[#F8F9FA] dark:bg-[#121212] border border-gray-200 dark:border-gray-700 dark:text-white rounded-md focus:outline-none focus:border-[#FFB703]" placeholder="Société" /></div>
+                <div><label className="block text-sm font-bold text-[#212529] dark:text-white mb-2">Nom</label><input type="text" name="nom" className="w-full p-3 bg-[#F8F9FA] dark:bg-[#121212] border border-gray-200 dark:border-gray-700 dark:text-white rounded-md focus:outline-none focus:border-[#FFB703]" placeholder="Votre nom" /></div>
+                <div><label className="block text-sm font-bold text-[#212529] dark:text-white mb-2">Entreprise (Optionnel)</label><input type="text" name="entreprise" className="w-full p-3 bg-[#F8F9FA] dark:bg-[#121212] border border-gray-200 dark:border-gray-700 dark:text-white rounded-md focus:outline-none focus:border-[#FFB703]" placeholder="Société" /></div>
               </div>
               <div className="grid sm:grid-cols-2 gap-6 mb-6">
-                <div><label className="block text-sm font-bold text-[#212529] dark:text-white mb-2">Email *</label><input type="email" required className="w-full p-3 bg-[#F8F9FA] dark:bg-[#121212] border border-gray-200 dark:border-gray-700 dark:text-white rounded-md focus:outline-none focus:border-[#FFB703]" placeholder="email@exemple.com" /></div>
-                <div><label className="block text-sm font-bold text-[#212529] dark:text-white mb-2">Téléphone</label><input type="tel" className="w-full p-3 bg-[#F8F9FA] dark:bg-[#121212] border border-gray-200 dark:border-gray-700 dark:text-white rounded-md focus:outline-none focus:border-[#FFB703]" placeholder="06 00 00 00 00" /></div>
+                <div><label className="block text-sm font-bold text-[#212529] dark:text-white mb-2">Email *</label><input type="email" name="email" required className="w-full p-3 bg-[#F8F9FA] dark:bg-[#121212] border border-gray-200 dark:border-gray-700 dark:text-white rounded-md focus:outline-none focus:border-[#FFB703]" placeholder="email@exemple.com" /></div>
+                <div><label className="block text-sm font-bold text-[#212529] dark:text-white mb-2">Téléphone</label><input type="tel" name="telephone" className="w-full p-3 bg-[#F8F9FA] dark:bg-[#121212] border border-gray-200 dark:border-gray-700 dark:text-white rounded-md focus:outline-none focus:border-[#FFB703]" placeholder="06 00 00 00 00" /></div>
               </div>
               <div className="mb-6">
                 <label className="block text-sm font-bold text-[#212529] dark:text-white mb-2">Votre message *</label>
-                <textarea rows="5" required className="w-full p-3 bg-[#F8F9FA] dark:bg-[#121212] border border-gray-200 dark:border-gray-700 dark:text-white rounded-md focus:outline-none focus:border-[#FFB703] resize-none" placeholder="Décrivez brièvement votre projet..."></textarea>
+                <textarea rows="5" name="message" required className="w-full p-3 bg-[#F8F9FA] dark:bg-[#121212] border border-gray-200 dark:border-gray-700 dark:text-white rounded-md focus:outline-none focus:border-[#FFB703] resize-none" placeholder="Décrivez brièvement votre projet..."></textarea>
               </div>
 
               {/* CASE RGPD */}
-              <div className="mb-8 flex items-start gap-3">
+              <div className="mb-6 flex items-start gap-3">
                 <input type="checkbox" id="rgpd" required checked={rgpdAccepted} onChange={(e) => setRgpdAccepted(e.target.checked)} className="mt-1 w-4 h-4 text-[#FFB703] bg-gray-100 border-gray-300 rounded focus:ring-[#FFB703] cursor-pointer" />
                 <label htmlFor="rgpd" className="text-sm text-gray-500 dark:text-gray-400 cursor-pointer">
                   En soumettant ce formulaire, j'accepte que les informations saisies soient exploitées dans le cadre de la demande de contact et de la relation commerciale qui peut en découler.
                 </label>
               </div>
 
-              <button type="submit" className="w-full flex items-center justify-center gap-2 bg-[#212529] dark:bg-[#FFB703] text-white dark:text-[#212529] font-bold py-4 px-8 rounded-md hover:bg-gray-800 dark:hover:bg-yellow-500 transition-colors shadow-md">
+              {status === 'error' && (
+                <div className="mb-6 flex items-start gap-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
+                  <AlertCircle className="text-red-500 shrink-0 mt-0.5" size={20} />
+                  <p className="text-sm text-red-700 dark:text-red-400">
+                    Une erreur est survenue lors de l'envoi. Vous pouvez réessayer, ou m'écrire directement à contact@jtweb.fr.
+                  </p>
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={status === 'sending'}
+                className="w-full flex items-center justify-center gap-2 bg-[#212529] dark:bg-[#FFB703] text-white dark:text-[#212529] font-bold py-4 px-8 rounded-md hover:bg-gray-800 dark:hover:bg-yellow-500 transition-colors shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
+              >
                 <Send size={18} />
-                Envoyer ma demande
+                {status === 'sending' ? 'Envoi en cours...' : 'Envoyer ma demande'}
               </button>
 
             </form>
