@@ -1,14 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MapPin, Mail, Phone, Clock, Send } from 'lucide-react';
 
-export default function Contact() {
+export default function Contact({ prefilledSubject }) {
   const [sujetDemande, setSujetDemande] = useState('essentiel');
   const [rgpdAccepted, setRgpdAccepted] = useState(false);
+
+  useEffect(() => {
+    if (prefilledSubject) setSujetDemande(prefilledSubject);
+  }, [prefilledSubject]);
 
   const optionsSujet = [
     { id: 'essentiel', label: 'Pack Essentiel' },
     { id: 'pro', label: 'Pack Pro' },
     { id: 'maintenance', label: 'Maintenance' },
+    { id: 'parrainage', label: "Je parraine quelqu'un" },
     { id: 'autre', label: 'Autre demande' },
   ];
 

@@ -1,4 +1,4 @@
-import { Check, X, ArrowRight } from 'lucide-react';
+import { Check, X, ArrowRight, ExternalLink } from 'lucide-react';
 
 export default function Services() {
   const placesRestantesEssentiel = 5;
@@ -74,6 +74,10 @@ export default function Services() {
             <a href="#contact" className="block w-full text-center bg-gray-100 dark:bg-gray-800 text-[#212529] dark:text-white px-6 py-3 rounded-md font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
               Demander un devis
             </a>
+            <a href="LIEN_DEMO_ESSENTIEL" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1.5 w-full text-center text-sm font-semibold text-gray-500 dark:text-gray-400 hover:text-[#212529] dark:hover:text-white mt-3 transition-colors">
+              Voir un exemple concret
+              <ExternalLink size={14} />
+            </a>
           </div>
 
           {/* ---------------- OFFRE PRO ---------------- */}
@@ -136,6 +140,10 @@ export default function Services() {
             <a href="#contact" className="flex items-center justify-center gap-2 w-full bg-[#212529] dark:bg-[#FFB703] text-white dark:text-[#212529] px-6 py-3 rounded-md font-bold hover:bg-gray-800 dark:hover:bg-yellow-500 transition-colors shadow-md">
               Démarrer mon projet Pro
               <ArrowRight size={18} />
+            </a>
+            <a href="LIEN_DEMO_PRO" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1.5 w-full text-center text-sm font-semibold text-gray-500 dark:text-gray-400 hover:text-[#212529] dark:hover:text-white mt-3 transition-colors">
+              Voir un exemple concret
+              <ExternalLink size={14} />
             </a>
           </div>
 
