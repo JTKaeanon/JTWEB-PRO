@@ -3,17 +3,27 @@ import { Check, X, ArrowRight, ExternalLink } from 'lucide-react';
 export default function Services() {
   const placesRestantesEssentiel = 5;
   const placesRestantesPro = 5;
-  
+
   return (
     <section id="services" className="pt-12 pb-24 bg-[#F8F9FA] dark:bg-[#121212] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl font-extrabold text-[#212529] dark:text-white mb-4">Sites & Tarifs</h2>
           <p className="text-lg text-gray-600 dark:text-gray-400">
-            Des formules transparentes et adaptées à la taille de votre entreprise.
-            Aucun coût caché, tout est clair dès le départ.
+            Deux formules simples, prix fixe et sans surprise. Vous savez exactement ce que vous payez, dès le premier jour.
           </p>
+        </div>
+
+        {/* Bandeau des éléments communs aux deux offres */}
+        <div className="max-w-5xl mx-auto mb-8 flex flex-wrap justify-center gap-x-8 gap-y-3 bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-900/30 rounded-xl px-6 py-4">
+          <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 w-full text-center mb-1">Compris dans les deux offres</span>
+          {['Design 100% responsive (mobile & tablette)', 'Formulaire de contact intégré'].map((item) => (
+            <span key={item} className="flex items-center gap-2 text-sm font-medium text-[#212529] dark:text-white">
+              <Check className="text-[#FFB703]" size={16} />
+              {item}
+            </span>
+          ))}
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-center">
@@ -22,23 +32,18 @@ export default function Services() {
           <div className="bg-white dark:bg-[#1a1d20] p-8 sm:p-10 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 transition-colors duration-300">
             <h3 className="text-2xl font-bold text-[#212529] dark:text-white mb-2">Pack Essentiel</h3>
             <p className="text-gray-500 dark:text-gray-400 mb-6 min-h-[48px]">
-              La carte de visite digitale (One-Page) idéale pour démarrer votre présence en ligne.
+              Pour exister en ligne rapidement : une page claire qui présente votre activité et donne envie de vous appeler.
             </p>
             <div className="mb-8">
-              {/* Ligne des prix (Barré + Nouveau prix) */}
               <div className="flex items-baseline gap-3 mb-2">
                 <span className="text-4xl font-extrabold text-[#212529] dark:text-white">400 €</span>
                 <span className="text-xl font-bold text-gray-400 dark:text-gray-500 line-through decoration-red-500 decoration-2">
                   600 €
                 </span>
               </div>
-
-              {/* Mention de prix fixe pour rassurer */}
               <div className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">
                 Prix fixe, sans frais cachés.
               </div>
-
-              {/* Badge d'urgence animé avec variable */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs font-bold rounded-full">
                 <span className="relative flex h-2.5 w-2.5 shrink-0">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -48,22 +53,19 @@ export default function Services() {
               </div>
             </div>
 
+            <p className="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-3">En plus du socle commun</p>
             <ul className="space-y-4 mb-8">
               <li className="flex items-start gap-3">
                 <Check className="text-green-500 shrink-0 mt-0.5" size={20} />
                 <span className="text-gray-700 dark:text-gray-300">Site One-Page (une seule page fluide)</span>
               </li>
-              <li className="flex items-start gap-3">
-                <Check className="text-green-500 shrink-0 mt-0.5" size={20} />
-                <span className="text-gray-700 dark:text-gray-300">Design adapté aux mobiles et tablettes</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Check className="text-green-500 shrink-0 mt-0.5" size={20} />
-                <span className="text-gray-700 dark:text-gray-300">Formulaire de contact direct</span>
-              </li>
               <li className="flex items-start gap-3 text-gray-400 dark:text-gray-600">
                 <X className="shrink-0 mt-0.5" size={20} />
                 <span>Architecture Multi-pages</span>
+              </li>
+              <li className="flex items-start gap-3 text-gray-400 dark:text-gray-600">
+                <X className="shrink-0 mt-0.5" size={20} />
+                <span>Portfolio et galeries de réalisations</span>
               </li>
               <li className="flex items-start gap-3 text-gray-400 dark:text-gray-600">
                 <X className="shrink-0 mt-0.5" size={20} />
@@ -88,23 +90,18 @@ export default function Services() {
 
             <h3 className="text-2xl font-bold text-[#212529] dark:text-white mb-2">Pack Pro</h3>
             <p className="text-gray-500 dark:text-gray-400 mb-6 min-h-[48px]">
-              Le site complet pour détailler votre expertise, rassurer vos clients et dominer votre secteur.
+              Pour être trouvé ET convaincre : plusieurs pages, vos réalisations en photo, et un meilleur classement local.
             </p>
             <div className="mb-8">
-              {/* Ligne des prix (Barré + Nouveau prix) */}
               <div className="flex items-baseline gap-3 mb-2">
                 <span className="text-4xl font-extrabold text-[#212529] dark:text-white">1 000 €</span>
                 <span className="text-xl font-bold text-gray-400 dark:text-gray-500 line-through decoration-red-500 decoration-2">
                   1 200 €
                 </span>
               </div>
-
-              {/* Mention de prix fixe pour rassurer */}
               <div className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">
                 Prix fixe, sans frais cachés.
               </div>
-
-              {/* Badge d'urgence animé avec variable */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs font-bold rounded-full">
                 <span className="relative flex h-2.5 w-2.5 shrink-0">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -114,6 +111,7 @@ export default function Services() {
               </div>
             </div>
 
+            <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">En plus du socle commun</p>
             <ul className="space-y-4 mb-8">
               <li className="flex items-start gap-3">
                 <Check className="text-[#FFB703] shrink-0 mt-0.5" size={20} />

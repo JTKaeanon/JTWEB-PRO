@@ -21,7 +21,7 @@ export default function Contact({ prefilledSubject }) {
   ];
 
   const optionsRoleParrainage = [
-    { id: 'je-parraine', label: 'Je parraine quelqu\'un' },
+    { id: 'je-parraine', label: "Je parraine quelqu'un" },
     { id: 'on-ma-parraine', label: "On m'a parrainé(e)" },
   ];
 
@@ -37,8 +37,6 @@ export default function Contact({ prefilledSubject }) {
     if (!estParrainage) setParrainageRole('je-parraine');
   }, [estParrainage]);
 
-  // Le bandeau de succès se referme tout seul après 6 secondes,
-  // pas besoin de recharger la page pour ré-accéder au formulaire.
   useEffect(() => {
     if (status === 'success') {
       const timer = setTimeout(() => setStatus('idle'), 6000);
@@ -107,7 +105,6 @@ export default function Contact({ prefilledSubject }) {
                 <div><h4 className="font-bold text-[#212529] dark:text-white">Téléphone</h4><a href="tel:+33600000000" className="text-gray-600 dark:text-gray-400 hover:text-[#FFB703]">06 XX XX XX XX</a></div>
               </div>
 
-              {/* NOUVEAU BLOC POUR COMBLER LE VIDE */}
               <div className="flex items-start gap-4 pt-4 border-t border-gray-200 dark:border-gray-800">
                 <div className="bg-yellow-100 dark:bg-yellow-900/30 p-3 rounded-full text-[#FFB703] shrink-0"><Clock size={24} /></div>
                 <div><h4 className="font-bold text-[#212529] dark:text-white">Disponibilité</h4><p className="text-gray-600 dark:text-gray-400">Du Lundi au Vendredi<br/>9h00 - 18h00</p></div>
@@ -169,6 +166,14 @@ export default function Contact({ prefilledSubject }) {
                       </label>
                     ))}
                   </div>
+
+                  {parrainageRole === 'on-ma-parraine' && (
+                    <div className="mt-4">
+                      <label className="block text-sm font-bold text-[#212529] dark:text-white mb-2">Code de parrainage</label>
+                      <input type="text" name="code_parrainage" className="w-full p-3 bg-[#F8F9FA] dark:bg-[#121212] border border-gray-200 dark:border-gray-700 dark:text-white rounded-md focus:outline-none focus:border-[#FFB703]" placeholder="Communiqué par la personne qui vous a recommandé" />
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">Demandez ce code à la personne qui vous a recommandé JT WEB.</p>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -185,7 +190,6 @@ export default function Contact({ prefilledSubject }) {
                 <textarea rows="5" name="message" required className="w-full p-3 bg-[#F8F9FA] dark:bg-[#121212] border border-gray-200 dark:border-gray-700 dark:text-white rounded-md focus:outline-none focus:border-[#FFB703] resize-none" placeholder="Décrivez brièvement votre projet..."></textarea>
               </div>
 
-              {/* CASE RGPD */}
               <div className="mb-6 flex items-start gap-3">
                 <input type="checkbox" id="rgpd" required checked={rgpdAccepted} onChange={(e) => setRgpdAccepted(e.target.checked)} className="mt-1 w-4 h-4 text-[#FFB703] bg-gray-100 border-gray-300 rounded focus:ring-[#FFB703] cursor-pointer" />
                 <label htmlFor="rgpd" className="text-sm text-gray-500 dark:text-gray-400 cursor-pointer">
