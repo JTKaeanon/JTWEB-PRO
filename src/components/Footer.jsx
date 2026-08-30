@@ -45,7 +45,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="pt-4 mt-2 border-t border-gray-800 w-2/3">
-                <a href="/mentions-legales" className="text-gray-500 hover:text-gray-300 transition-colors duration-200">
+                <a href="#mentions-legales" className="text-gray-500 hover:text-gray-300 transition-colors duration-200">
                   Mentions Légales & CGU
                 </a>
               </li>

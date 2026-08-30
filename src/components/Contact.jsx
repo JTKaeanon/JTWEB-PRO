@@ -5,19 +5,52 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xvkooeyv';
 
 export default function Contact({ prefilledSubject }) {
   const [sujetDemande, setSujetDemande] = useState('essentiel');
+  const [maintenanceChoice, setMaintenanceChoice] = useState('aucun');
+  const [parrainageRole, setParrainageRole] = useState('je-parraine');
   const [rgpdAccepted, setRgpdAccepted] = useState(false);
   const [status, setStatus] = useState('idle'); // idle | sending | success | error
   const formRef = useRef(null);
+
+  const achatDeSite = sujetDemande === 'essentiel' || sujetDemande === 'pro';
+  const estParrainage = sujetDemande === 'parrainage';
+
+  const optionsMaintenance = [
+    { id: 'standard', label: 'Standard' },
+    { id: 'serenite', label: 'Sérénité' },
+    { id: 'aucun', label: 'Sans maintenance' },
+  ];
+
+  const optionsRoleParrainage = [
+    { id: 'je-parraine', label: 'Je parraine quelqu\'un' },
+    { id: 'on-ma-parraine', label: "On m'a parrainé(e)" },
+  ];
 
   useEffect(() => {
     if (prefilledSubject) setSujetDemande(prefilledSubject);
   }, [prefilledSubject]);
 
+  useEffect(() => {
+    if (!achatDeSite) setMaintenanceChoice('aucun');
+  }, [achatDeSite]);
+
+  useEffect(() => {
+    if (!estParrainage) setParrainageRole('je-parraine');
+  }, [estParrainage]);
+
+  // Le bandeau de succès se referme tout seul après 6 secondes,
+  // pas besoin de recharger la page pour ré-accéder au formulaire.
+  useEffect(() => {
+    if (status === 'success') {
+      const timer = setTimeout(() => setStatus('idle'), 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
+
   const optionsSujet = [
     { id: 'essentiel', label: 'Pack Essentiel' },
     { id: 'pro', label: 'Pack Pro' },
     { id: 'maintenance', label: 'Maintenance' },
-    { id: 'parrainage', label: "Je parraine quelqu'un" },
+    { id: 'parrainage', label: 'Parrainage' },
     { id: 'autre', label: 'Autre demande' },
   ];
 
@@ -39,6 +72,8 @@ export default function Contact({ prefilledSubject }) {
         formRef.current.reset();
         setRgpdAccepted(false);
         setSujetDemande('essentiel');
+        setMaintenanceChoice('aucun');
+        setParrainageRole('je-parraine');
       } else {
         setStatus('error');
       }
@@ -46,20 +81,6 @@ export default function Contact({ prefilledSubject }) {
       setStatus('error');
     }
   };
-
-  if (status === 'success') {
-    return (
-      <section id="contact" className="py-24 bg-[#F8F9FA] dark:bg-[#121212] transition-colors duration-300">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <CheckCircle2 className="text-green-500 mx-auto mb-4" size={56} />
-          <h2 className="text-3xl font-extrabold text-[#212529] dark:text-white mb-4">Message envoyé !</h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
-            Merci pour votre demande, je reviens vers vous très rapidement.
-          </p>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section id="contact" className="py-24 bg-[#F8F9FA] dark:bg-[#121212] transition-colors duration-300">
@@ -98,6 +119,15 @@ export default function Contact({ prefilledSubject }) {
           <div className="lg:col-span-3">
             <form ref={formRef} onSubmit={handleSubmit} className="bg-white dark:bg-[#1a1d20] p-8 sm:p-10 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 transition-colors duration-300">
 
+              {status === 'success' && (
+                <div className="mb-6 flex items-start gap-3 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-md">
+                  <CheckCircle2 className="text-green-500 shrink-0 mt-0.5" size={20} />
+                  <p className="text-sm text-green-700 dark:text-green-400">
+                    Message envoyé ! Merci pour votre demande, je reviens vers vous très rapidement.
+                  </p>
+                </div>
+              )}
+
               <div className="mb-8">
                 <label className="block text-sm font-bold text-[#212529] dark:text-white mb-4">Quel est l'objet de votre demande ?</label>
                 <div className="grid sm:grid-cols-2 gap-3">
@@ -109,6 +139,38 @@ export default function Contact({ prefilledSubject }) {
                   ))}
                 </div>
               </div>
+
+              {achatDeSite && (
+                <div className="mb-8 pl-4 border-l-2 border-[#FFB703]">
+                  <label className="block text-sm font-bold text-[#212529] dark:text-white mb-4">
+                    Avec un forfait maintenance associé ?
+                  </label>
+                  <div className="grid grid-cols-3 gap-3">
+                    {optionsMaintenance.map((option) => (
+                      <label key={option.id} className={`flex items-center justify-center p-3 cursor-pointer rounded-lg border-2 transition-all duration-200 text-xs sm:text-sm font-semibold text-center ${maintenanceChoice === option.id ? 'border-[#FFB703] bg-yellow-50 dark:bg-yellow-900/20 text-[#212529] dark:text-white' : 'border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800'}`}>
+                        <input type="radio" name="maintenance" value={option.id} checked={maintenanceChoice === option.id} onChange={(e) => setMaintenanceChoice(e.target.value)} className="sr-only" />
+                        {option.label}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {estParrainage && (
+                <div className="mb-8 pl-4 border-l-2 border-[#FFB703]">
+                  <label className="block text-sm font-bold text-[#212529] dark:text-white mb-4">
+                    Vous êtes...
+                  </label>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {optionsRoleParrainage.map((option) => (
+                      <label key={option.id} className={`flex items-center justify-center p-3 cursor-pointer rounded-lg border-2 transition-all duration-200 text-sm font-semibold text-center ${parrainageRole === option.id ? 'border-[#FFB703] bg-yellow-50 dark:bg-yellow-900/20 text-[#212529] dark:text-white' : 'border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800'}`}>
+                        <input type="radio" name="role_parrainage" value={option.id} checked={parrainageRole === option.id} onChange={(e) => setParrainageRole(e.target.value)} className="sr-only" />
+                        {option.label}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <div className="grid sm:grid-cols-2 gap-6 mb-6">
                 <div><label className="block text-sm font-bold text-[#212529] dark:text-white mb-2">Nom</label><input type="text" name="nom" className="w-full p-3 bg-[#F8F9FA] dark:bg-[#121212] border border-gray-200 dark:border-gray-700 dark:text-white rounded-md focus:outline-none focus:border-[#FFB703]" placeholder="Votre nom" /></div>
