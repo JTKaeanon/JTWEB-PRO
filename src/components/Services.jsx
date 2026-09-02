@@ -56,8 +56,12 @@ export default function Services() {
             <p className="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-3">En plus du socle commun</p>
             <ul className="space-y-4 mb-8">
               <li className="flex items-start gap-3">
-                <Check className="text-green-500 shrink-0 mt-0.5" size={20} />
+                <Check className="text-[#FFB703] shrink-0 mt-0.5" size={20} />
                 <span className="text-gray-700 dark:text-gray-300">Site One-Page (une seule page fluide)</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Check className="text-[#FFB703] shrink-0 mt-0.5" size={20} />
+                <span className="text-gray-700 dark:text-gray-300">Galerie photos de vos réalisations</span>
               </li>
               <li className="flex items-start gap-3 text-gray-400 dark:text-gray-600">
                 <X className="shrink-0 mt-0.5" size={20} />
@@ -65,11 +69,19 @@ export default function Services() {
               </li>
               <li className="flex items-start gap-3 text-gray-400 dark:text-gray-600">
                 <X className="shrink-0 mt-0.5" size={20} />
-                <span>Portfolio et galeries de réalisations</span>
+                <span>Page Réalisations avec fiche détaillée par chantier</span>
               </li>
               <li className="flex items-start gap-3 text-gray-400 dark:text-gray-600">
                 <X className="shrink-0 mt-0.5" size={20} />
                 <span>Référencement local avancé (SEO)</span>
+              </li>
+              <li className="flex items-start gap-3 text-gray-400 dark:text-gray-600">
+                <X className="shrink-0 mt-0.5" size={20} />
+                <span>Avis clients</span>
+              </li>
+              <li className="flex items-start gap-3 text-gray-400 dark:text-gray-600">
+                <X className="shrink-0 mt-0.5" size={20} />
+                <span>FAQ intégrée</span>
               </li>
             </ul>
 
@@ -119,7 +131,7 @@ export default function Services() {
               </li>
               <li className="flex items-start gap-3">
                 <Check className="text-[#FFB703] shrink-0 mt-0.5" size={20} />
-                <span className="text-gray-700 dark:text-gray-300">Portfolio et galeries de vos réalisations</span>
+                <span className="text-gray-700 dark:text-gray-300">Page Réalisations avec fiche détaillée par chantier</span>
               </li>
               <li className="flex items-start gap-3">
                 <Check className="text-[#FFB703] shrink-0 mt-0.5" size={20} />
@@ -127,11 +139,11 @@ export default function Services() {
               </li>
               <li className="flex items-start gap-3">
                 <Check className="text-[#FFB703] shrink-0 mt-0.5" size={20} />
-                <span className="text-gray-700 dark:text-gray-300">Statistiques respectueuses de la vie privée</span>
+                <span className="text-gray-700 dark:text-gray-300">Section avis clients dédiée</span>
               </li>
               <li className="flex items-start gap-3">
                 <Check className="text-[#FFB703] shrink-0 mt-0.5" size={20} />
-                <span className="text-gray-700 dark:text-gray-300">Design sur mesure et animations fluides</span>
+                <span className="text-gray-700 dark:text-gray-300">FAQ intégrée</span>
               </li>
             </ul>
 
