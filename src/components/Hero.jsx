@@ -1,4 +1,4 @@
-import { ArrowRight, Download } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -13,23 +13,22 @@ export default function Hero() {
 
         {/* Titre principal adapté */}
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#212529] dark:text-white tracking-tight leading-tight mb-6 transition-colors duration-300">
-          Attirez plus de chantiers avec un site internet <span className="text-[#FFB703] underline decoration-4 underline-offset-8">performant</span> et à votre image.
+          Votre meilleur commercial ne dort jamais : un site qui vous ramène de vrais <span className="text-[#FFB703] underline decoration-4 underline-offset-8">chantiers</span>.
         </h1>
 
         {/* Sous-titre adapté */}
         <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed transition-colors duration-300">
-          Des solutions web clés en main, rapides et optimisées pour les artisans. Je personnalise des structures éprouvées pour transformer vos visiteurs en clients, sans exploser votre budget.
+          Une structure éprouvée, personnalisée à votre métier. Rapide, clair, et pensé pour transformer un visiteur en client — sans jargon technique ni surprise sur la facture.
         </p>
 
         {/* Boutons d'action centrés */}
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <a 
-            href="/plaquette-jtweb.pdf" 
-            download="Plaquette_JTWEB.pdf" 
+          <a
+            href="#contact"
             className="inline-flex justify-center items-center gap-2 bg-[#FFB703] text-[#212529] px-8 py-4 rounded-md font-bold text-lg hover:bg-yellow-500 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-200"
           >
-            <Download size={20} />
-            Télécharger la plaquette
+            Demander un devis gratuit
+            <ArrowRight size={20} />
           </a>
           <a 
             href="#services" 

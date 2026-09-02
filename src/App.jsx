@@ -17,11 +17,35 @@ function App() {
 
   useEffect(() => {
     const onHashChange = () => {
-      setPage(window.location.hash === '#mentions-legales' ? 'legal' : 'home')
-      window.scrollTo(0, 0)
+      const versPageLegale = window.location.hash === '#mentions-legales'
+      setPage(versPageLegale ? 'legal' : 'home')
+      if (versPageLegale) window.scrollTo(0, 0)
     }
     window.addEventListener('hashchange', onHashChange)
     return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
+  // Gère nous-mêmes le scroll vers les ancres (#services, #contact, etc.)
+  // plutôt que de compter sur le navigateur : ça évite le bug où le premier
+  // clic "rate" sa cible (souvent causé par un décalage de mise en page
+  // pendant le chargement de la police, qui perturbe le scroll natif).
+  useEffect(() => {
+    const handleAnchorClick = (e) => {
+      const link = e.target.closest('a[href^="#"]')
+      if (!link) return
+
+      const hash = link.getAttribute('href')
+      if (hash === '#' || hash === '#mentions-legales') return // logo et page légale gérés ailleurs
+
+      const target = document.querySelector(hash)
+      if (target) {
+        e.preventDefault()
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        window.history.pushState(null, '', hash)
+      }
+    }
+    document.addEventListener('click', handleAnchorClick)
+    return () => document.removeEventListener('click', handleAnchorClick)
   }, [])
 
   const retourAuSite = () => {
