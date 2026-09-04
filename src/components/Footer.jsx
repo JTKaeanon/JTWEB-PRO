@@ -39,6 +39,18 @@ export default function Footer() {
                 </a>
               </li>
               <li>
+                <a href="#parrainage" className="hover:text-[#FFB703] transition-colors duration-200 flex items-center gap-1 group">
+                  Parrainage 
+                  <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity transform -translate-y-1 translate-x-1" />
+                </a>
+              </li>
+              <li>
+                <a href="#contact" className="hover:text-[#FFB703] transition-colors duration-200 flex items-center gap-1 group">
+                  Contact 
+                  <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity transform -translate-y-1 translate-x-1" />
+                </a>
+              </li>
+              <li>
                 <a href="#about" className="hover:text-[#FFB703] transition-colors duration-200 flex items-center gap-1 group">
                   Qui suis-je ? 
                   <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity transform -translate-y-1 translate-x-1" />

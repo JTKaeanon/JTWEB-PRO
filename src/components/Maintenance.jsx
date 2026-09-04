@@ -18,7 +18,7 @@ export default function Maintenance() {
         {/* Bandeau des éléments communs aux deux forfaits */}
         <div className="max-w-5xl mx-auto mb-8 flex flex-wrap justify-center gap-x-8 gap-y-3 bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-900/30 rounded-xl px-6 py-4">
           <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 w-full text-center mb-1">Commun aux deux forfaits</span>
-          {['Mises à jour régulières', 'Surveillance sécurité de base', 'Rapport de visites trimestriel'].map((item) => (
+          {['Mises à jour régulières', 'Surveillance sécurité de base', 'Remise en ligne rapide en cas de panne'].map((item) => (
             <span key={item} className="flex items-center gap-2 text-sm font-medium text-[#212529] dark:text-white">
               <Check className="text-[#FFB703]" size={16} />
               {item}
@@ -55,10 +55,10 @@ export default function Maintenance() {
 
             <p className="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-3">En plus du socle commun</p>
             <ul className="space-y-4 mb-8">
-              <li className="flex items-start gap-3"><Check className="text-green-500 shrink-0 mt-0.5" size={20} /><span className="text-gray-700 dark:text-gray-300">Sauvegardes mensuelles complètes</span></li>
+              <li className="flex items-start gap-3"><Check className="text-green-500 shrink-0 mt-0.5" size={20} /><span className="text-gray-700 dark:text-gray-300">Sauvegardes hebdomadaires complètes</span></li>
+              <li className="flex items-start gap-3"><Check className="text-green-500 shrink-0 mt-0.5" size={20} /><span className="text-gray-700 dark:text-gray-300">Rapport de visites &amp; conversions, trimestriel</span></li>
               <li className="flex items-start gap-3 text-gray-400 dark:text-gray-600"><X className="shrink-0 mt-0.5" size={20} /><span>Modifications de contenu incluses</span></li>
               <li className="flex items-start gap-3 text-gray-400 dark:text-gray-600"><X className="shrink-0 mt-0.5" size={20} /><span>Statistiques de fréquentation détaillées</span></li>
-              <li className="flex items-start gap-3 text-gray-400 dark:text-gray-600"><X className="shrink-0 mt-0.5" size={20} /><span>Restauration prioritaire en cas de panne</span></li>
             </ul>
             <a href="#contact" className="block w-full text-center bg-gray-100 dark:bg-gray-800 text-[#212529] dark:text-white px-6 py-3 rounded-md font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
               Choisir ce forfait
@@ -69,7 +69,7 @@ export default function Maintenance() {
           <div className="bg-[#212529] p-8 sm:p-10 rounded-2xl shadow-xl border-t-4 border-[#FFB703] relative transform md:-translate-y-4 text-white">
             <h3 className="text-2xl font-bold text-white mb-2">Sérénité</h3>
             <p className="text-gray-400 mb-6 min-h-[48px]">
-              Vous ne touchez plus à rien : sauvegardes plus fréquentes, priorité en cas de souci, et du temps de modification chaque mois.
+              Vous ne touchez plus à rien : sauvegardes quotidiennes, statistiques mensuelles, et du temps de modification chaque mois.
             </p>
 
             <div className="mb-8">
@@ -92,9 +92,8 @@ export default function Maintenance() {
 
             <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">En plus du socle commun</p>
             <ul className="space-y-4 mb-8">
-              <li className="flex items-start gap-3"><Check className="text-[#FFB703] shrink-0 mt-0.5" size={20} /><span className="text-gray-300">Sauvegardes hebdomadaires (au lieu de mensuelles)</span></li>
-              <li className="flex items-start gap-3"><Check className="text-[#FFB703] shrink-0 mt-0.5" size={20} /><span className="text-gray-300">Restauration prioritaire en cas de panne</span></li>
-              <li className="flex items-start gap-3"><Check className="text-[#FFB703] shrink-0 mt-0.5" size={20} /><span className="text-gray-300 font-medium">Statistiques éthiques détaillées (sans cookies)</span></li>
+              <li className="flex items-start gap-3"><Check className="text-[#FFB703] shrink-0 mt-0.5" size={20} /><span className="text-gray-300">Sauvegardes quotidiennes (au lieu d'hebdomadaires)</span></li>
+              <li className="flex items-start gap-3"><Check className="text-[#FFB703] shrink-0 mt-0.5" size={20} /><span className="text-gray-300 font-medium">Rapport de visites &amp; conversions, mensuel (stats éthiques, sans cookies)</span></li>
               <li className="flex items-start gap-3"><Check className="text-[#FFB703] shrink-0 mt-0.5" size={20} /><span className="text-gray-300 font-medium">1h/mois de modification de contenu incluse</span></li>
             </ul>
             <a href="#contact" className="block w-full text-center bg-[#FFB703] text-[#212529] px-6 py-3 rounded-md font-bold hover:bg-yellow-500 transition-colors">

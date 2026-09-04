@@ -10,7 +10,7 @@ export default function Parrainage({ onCtaClick }) {
         </div>
 
         <h2 className="text-3xl font-extrabold text-white mb-4">
-          Le meilleur commercial, c'est vous
+          Vos clients satisfaits, votre meilleure publicité
         </h2>
 
         <p className="text-gray-300 dark:text-gray-400 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
